@@ -1,6 +1,6 @@
 import BoardItem from "./bordItem"
 
-const Board = ({ boards, setBoards, tour, setTour, winKeys, setWinKeys }) => {
+const Board = ({ winner, setWinner, boards, setBoards, tour, setTour, winKeys, setWinKeys }) => {
 
     return (
         <div className='board'>
@@ -12,6 +12,8 @@ const Board = ({ boards, setBoards, tour, setTour, winKeys, setWinKeys }) => {
                 index={index}
                 winKeys={winKeys}
                 setWinKeys={setWinKeys}
+                setWinner={setWinner}
+                winner={winner}
             >
                 {el ? el : ""}
             </BoardItem>)}
