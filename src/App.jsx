@@ -2,20 +2,20 @@ import { useState } from 'react'
 import './App.css'
 import Board from './components/Board'
 import Turn from './components/turn'
-
-const Result = ({ winner, resetGame }) => {
-  return (
-    <div className="result">
-      {!winner && <span class="draw">Draw</span>}
-      {winner && <span class="winner">The winner is : {winner}</span>}
-      <button onClick={resetGame}> Reset the Game</button>
-    </div>
-  )
-}
+import Result from './components/result'
 
 function App() {
-  const [tour, setTour] = useState("o")
-  const [boards, setBoards] = useState(new Array(9).fill(null))
+  const [tour, setTour] = useState(() => {
+    return window.localStorage.getItem("tour")
+      ? JSON.parse(window.localStorage.getItem("tour"))
+      : "o"
+  })
+  const [boards, setBoards] = useState(() => {
+    return window.localStorage.getItem("boards")
+      ? JSON.parse(window.localStorage.getItem("boards"))
+      : new Array(9).fill(null)
+  })
+  console.log(boards, window.localStorage.getItem("boards"))
   const [winKeys, setWinKeys] = useState(new Array(3).fill(null))
   const [winner, setWinner] = useState(null)
 
@@ -29,6 +29,7 @@ function App() {
 
   return (
     <div className='container'>
+      <button className="btn" onClick={resetGame}>reset Game</button>
       <Board setTour={setTour}
         tour={tour}
         boards={boards}
